@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "grafo.h"
+
+
 
 //------------------------------------------------------------------------------
 
@@ -8,7 +11,14 @@ int main(void) {
   vertice v;
   double coef;
 
-  g = le_grafo(stdin);
+  FILE *input = fopen("peterson.txt","w");
+
+  if(input == NULL){
+    puts("Erro ao ler arquivo!");
+    return 1;
+  }
+  g = le_grafo(input);
+
   // v = le_vertice();
 
   // if( !g ){

@@ -2,29 +2,28 @@
 #define _GRAFO_H
 
 #include <stdio.h>
-#define N 6
+#define MAX_NOME 20
 
 //------------------------------------------------------------------------------
 // (apontador para) estrutura de dados para representar um grafo
 // 
 // o grafo tem um nome, que é uma "string"
-struct grafo
-{
-    int numVertices;
-    struct vertice** adjLists;
+struct grafo {
+    char nome[MAX_NOME];
+    int numero_vertices;
+    struct vertice* vertices;
 };
-typedef struct grafo *grafo;
+typedef struct grafo *grafo; //OK
 
 //------------------------------------------------------------------------------
 // (apontador para) estrutura de dados para representar um vértice
 // 
 // o vértice tem um nome, que é uma "string"
-struct vertice
-{
-    int vertex;
-    struct node* next;
+struct vertice {
+    char nome[MAX_NOME];
+    struct vertice* proximo;
 };
-typedef struct vertice *vertice;
+typedef struct vertice *vertice; //OK
 
 //------------------------------------------------------------------------------
 // desaloca toda a memória usada em *g
@@ -33,7 +32,7 @@ typedef struct vertice *vertice;
 //         ou 
 //         0, caso contrário
 
-int destroi_grafo(grafo g);
+int destroi_grafo(grafo g); //OK
 
 //------------------------------------------------------------------------------
 // lê um grafo de input.

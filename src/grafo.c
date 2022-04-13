@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "grafo.h"
 
 //------------------------------------------------------------------------------
@@ -24,6 +25,13 @@ typedef struct vertice *vertice;
 
 int destroi_grafo(grafo g) {
 
+  for (int i=0; i <= g->numero_vertices; i++){
+    struct vertice ver = g->vertices[i];
+    free(ver.proximo);
+  }
+
+  free(g->vertices);
+  free(g);
   return g == NULL;
 }
 
@@ -35,6 +43,17 @@ int destroi_grafo(grafo g) {
 //         NULL, em caso de erro 
 
 grafo le_grafo(FILE *input) {
+
+  struct grafo *g;
+  
+  input = fopen("peterson.txt","w");
+  char *str2 = malloc(MAX_NOME * sizeof(char));
+  while(!feof(input)){
+    
+    fgets(str2, MAX_NOME, input);
+    puts(str2);
+  }
+  free(str2);
 
   return (grafo)input;
 }
