@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "grafo.h"
 
 
+int main(void){
 
-//------------------------------------------------------------------------------
-
-int main(void) {
-  grafo g;
-  vertice v;
+  struct grafo* g;
+  struct vertice v;
   double coef;
 
-  FILE *input = fopen("peterson.txt","w");
+  FILE *input;
+  input = fopen("peterson.txt","r+");
 
   if(input == NULL){
     puts("Erro ao ler arquivo!");
     return 1;
   }
+
   g = le_grafo(input);
+
 
   // v = le_vertice();
 
