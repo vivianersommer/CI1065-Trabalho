@@ -6,8 +6,7 @@
 
 int main(void){
 
-  struct grafo* g;
-  struct vertice v;
+  struct Grafo* grafo;
   double coef;
 
   FILE *input;
@@ -18,7 +17,7 @@ int main(void){
     return 1;
   }
 
-  g = le_grafo(input);
+  grafo = leitura_arquivo(input);
 
 
   // v = le_vertice();
