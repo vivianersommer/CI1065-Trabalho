@@ -179,59 +179,64 @@ int destroi_grafo(struct Grafo* grafo){
     return grafo == NULL;
 }
 
-//struct Nodo_Lista_Adj* push(struct Nodo_Lista_Adj* fila, struct Nodo_Lista_Adj vert, int tam){
-//
-//    int novo_index = tam + 1;
-//    fila = (struct Nodo_Lista_Adj*) realloc(fila, tam * sizeof(struct Nodo_Lista_Adj)
-//
-//    fila[novo_index].nome = vert.nome;
-//    fila[novo_index].proximo = NULL;
-//    if (tam != 0){
-//        fila[tam].proximo = fila[novo_index];
-//    }
-//
-//    return fila;
-//}
+int calcula_numero_vizinhos(struct Lista_Adj u){
 
-double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v)
-{
-
-    int n = grafo->numero_vertices;
-    int index_u, index_v;
-
-    bool visited[n];
-    for(int i = 0; i < n; i++){
-        visited[i] = false;
+    int vizinhos = 0;
+    struct Nodo_Lista_Adj* viz = u.cabeca;
+    while(viz != NULL){
+        viz = viz->proximo;
+        vizinhos = vizinhos + 1;
     }
 
-    int distance[n];
+    return vizinhos;
+}
+
+double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v){
+
+    struct Fila* fila;
+    int n, index_u, index_v, index_viz, index_x, distancia[grafo->numero_vertices], tam_vizinhos;
+    bool visitado[grafo->numero_vertices];
+
+    n = grafo->numero_vertices;
+
     for(int i = 0; i < n; i++){
-        distance[i] = 0;
+        visitado[i] = false;
+        distancia[i] = 0;
     }
 
     index_u = procurar_vertice(grafo, u.nome);
     index_v = procurar_vertice(grafo, v.nome);
 
-    struct Fila* fila = criar_fila(n);
+    u = grafo->lista[index_u];
+    v = grafo->lista[index_v];
+
+    fila = criar_fila(n);
     enfileira(fila, u);
 
-    distance[index_u] = 0;
-    visited[index_u] = true;
+    distancia[index_u] = 0;
+    visitado[index_u] = true;
 
-//    while (!isEmpty(fila)){
-//        Lista_Adj x = front(fila);
-//        Lista_Adj y = dequeue(fila);
-//
-//        for (int i=0; i<edges[x].size(); i++){
-//            if (visited[edges[x][i]])
-//                continue;
-//
-//            // update distance for i
-//            distance[edges[x][i]] = distance[x] + 1;
-//            Q.push(edges[x][i]);
-//            visited[edges[x][i]] = 1;
-//        }
-//    }
+    while (!esta_vazia(fila)){
+
+        struct Lista_Adj x = desenfileira(fila);
+        struct Nodo_Lista_Adj* viz = x.cabeca;
+        index_x = procurar_vertice(grafo, x.nome);
+
+        while(viz != NULL){
+            index_viz = procurar_vertice(grafo, viz->nome);
+
+            if (visitado[index_viz] == true){
+                continue;
+            }
+
+//            distancia[index_viz] = distancia[index_x] + 1;
+//            enfileira(fila, grafo->lista[index_viz]);
+//            visitado[index_viz] = true;
+
+            viz = viz->proximo;
+        }
+
+    }
 //    return distance[v];
 
     return 1;
