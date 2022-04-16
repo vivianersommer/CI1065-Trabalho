@@ -7,6 +7,7 @@
 int main(void){
 
   struct Grafo* grafo;
+  struct Lista_Adj* vertice;
   double coef;
 
   FILE *input;
@@ -19,17 +20,19 @@ int main(void){
 
   grafo = leitura_arquivo(input);
 
+  if(grafo == NULL){
+     return 1;
+  }
 
-  // v = le_vertice();
+  vertice = leitura_vertice();
 
-  // if( !g ){
-  //   return 1;
-  // }
+   if(vertice == NULL){
+     return 1;
+   }
 
-  // coef = coeficiente_proximidade(g,v);
+   coef = coeficiente_proximidade(grafo, vertice);
 
-  // printf ("O coeficiente de proximidade é %f\n", coef);
+   printf ("O coeficiente de proximidade é %f\n", coef);
 
-  // return ! destroi_grafo(g);
-  return 0;
+   return ! destroi_grafo(grafo);
 }

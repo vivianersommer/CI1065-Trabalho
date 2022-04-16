@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "grafo.h"
+#include "fila.h"
+#include "fila.h"
 
 #define MAX_NOME 20
 
@@ -124,8 +127,113 @@ struct Grafo* leitura_arquivo(FILE *input){
         // printf("--------------------------\n");
     }
 
-    imprimir_grafo(grafo);
+//    imprimir_grafo(grafo);
 
     return grafo;
+}
+
+struct Lista_Adj* leitura_vertice(){
+
+    struct Lista_Adj* vertice = (struct Lista_Adj*) malloc(sizeof(struct Lista_Adj));
+    char name[MAX_NOME];
+
+    printf("Digite o nome do vértice, para ser usado no cálculo do coeficiente de aproximação: ");
+    scanf("%s", name);
+
+    strcpy(vertice->nome, name);
+    vertice->cabeca = NULL;
+
+    return vertice;
+}
+
+double coeficiente_proximidade(struct Grafo* grafo, struct Lista_Adj* vertice){
+
+    double n , d, c;
+    n = grafo->numero_vertices;
+
+    for(int i=0; i< grafo->numero_vertices; i++){
+        d = d + busca_largura(grafo, *vertice, grafo->lista[i]);
+    }
+
+    c = n / d;
+    return c;
+}
+
+int destroi_grafo(struct Grafo* grafo){
+
+    struct Nodo_Lista_Adj* temp_1;
+    struct Nodo_Lista_Adj* temp_2;
+    for(int i=0; i<grafo->numero_vertices; i++){
+       temp_1 = grafo->lista[i].cabeca;
+       while (temp_1 != NULL) {
+            temp_2 = temp_1;
+            temp_1 = temp_1->proximo;
+            free(temp_2);
+       }
+    }
+    free(grafo->lista);
+    free(grafo);
+
+    free(temp_1);
+
+    return grafo == NULL;
+}
+
+//struct Nodo_Lista_Adj* push(struct Nodo_Lista_Adj* fila, struct Nodo_Lista_Adj vert, int tam){
+//
+//    int novo_index = tam + 1;
+//    fila = (struct Nodo_Lista_Adj*) realloc(fila, tam * sizeof(struct Nodo_Lista_Adj)
+//
+//    fila[novo_index].nome = vert.nome;
+//    fila[novo_index].proximo = NULL;
+//    if (tam != 0){
+//        fila[tam].proximo = fila[novo_index];
+//    }
+//
+//    return fila;
+//}
+
+double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v)
+{
+
+    int n = grafo->numero_vertices;
+    int index_u, index_v;
+
+    bool visited[n];
+    for(int i = 0; i < n; i++){
+        visited[i] = false;
+    }
+
+    int distance[n];
+    for(int i = 0; i < n; i++){
+        distance[i] = 0;
+    }
+
+    index_u = procurar_vertice(grafo, u.nome);
+    index_v = procurar_vertice(grafo, v.nome);
+
+    struct Fila* fila = criar_fila(n);
+    enfileira(fila, u);
+
+    distance[index_u] = 0;
+    visited[index_u] = true;
+
+//    while (!isEmpty(fila)){
+//        Lista_Adj x = front(fila);
+//        Lista_Adj y = dequeue(fila);
+//
+//        for (int i=0; i<edges[x].size(); i++){
+//            if (visited[edges[x][i]])
+//                continue;
+//
+//            // update distance for i
+//            distance[edges[x][i]] = distance[x] + 1;
+//            Q.push(edges[x][i]);
+//            visited[edges[x][i]] = 1;
+//        }
+//    }
+//    return distance[v];
+
+    return 1;
 }
 

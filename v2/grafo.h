@@ -60,6 +60,27 @@
     struct Grafo* leitura_arquivo(FILE *input);
     // ------------------------------------------------------------------------
 
+    // Função para ler vértice do terminal ------------------------------------
+    struct Lista_Adj* leitura_vertice();
+    // ------------------------------------------------------------------------
+
+    // Função para calcular coeficiente de aproximação ------------------------
+    double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v);
+    // ------------------------------------------------------------------------
+
+    // Função para calcular coeficiente de aproximação ------------------------
+    double coeficiente_proximidade(struct Grafo* grafo, struct Lista_Adj* vertice);
+    // ------------------------------------------------------------------------
+
+    // Função para calcular coeficiente de aproximação ------------------------
+    int destroi_grafo(struct Grafo* grafo);
+    // ------------------------------------------------------------------------
+
+    // Função para adicionar vértice em uma fila ------------------------------
+    struct Nodo_Lista_Adj* push(struct Nodo_Lista_Adj*, struct Nodo_Lista_Adj vert);
+    // ------------------------------------------------------------------------
+
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
 #endif
