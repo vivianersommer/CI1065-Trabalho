@@ -210,6 +210,10 @@ double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v
     u = grafo->lista[index_u];
     v = grafo->lista[index_v];
 
+    if (strcmp(u.nome, v.nome) == 0){
+            return 0;
+    }
+
     fila = criar_fila(n);
     enfileira(fila, u);
 
@@ -223,22 +227,21 @@ double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v
         index_x = procurar_vertice(grafo, x.nome);
 
         while(viz != NULL){
-            index_viz = procurar_vertice(grafo, viz->nome);
 
+            index_viz = procurar_vertice(grafo, viz->nome);
             if (visitado[index_viz] == true){
+                viz = viz->proximo;
                 continue;
             }
 
-//            distancia[index_viz] = distancia[index_x] + 1;
-//            enfileira(fila, grafo->lista[index_viz]);
-//            visitado[index_viz] = true;
+            distancia[index_viz] = distancia[index_x] + 1;
+            visitado[index_viz] = true;
+            enfileira(fila, grafo->lista[index_viz]);
 
             viz = viz->proximo;
         }
-
     }
-//    return distance[v];
 
-    return 1;
+    return distancia[index_v];
 }
 

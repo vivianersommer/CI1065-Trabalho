@@ -1,29 +1,7 @@
 a b 
 
-b c 
+b c
 
-c d 
+c d
 
-d e 
-
-e a 
-
-a f
-
-b g
-
-c h
-
-d i
-
-e j
-
-f h 
-
-h j 
-
-j g 
-
-g i 
-
-i f
+d e
