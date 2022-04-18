@@ -5,7 +5,6 @@ CFLAGS  = -std=c99 \
 	  -Wbad-function-cast \
 	  -Wcast-align \
 	  -Wcast-qual \
-	  -Wconversion \
 	  -Wfloat-equal \
 	  -Wformat-y2k \
 	  -Winit-self \
@@ -22,12 +21,9 @@ CFLAGS  = -std=c99 \
 	  -Wold-style-definition \
 	  -Woverlength-strings \
 	  -Wpacked \
-	  -Wpadded \
 	  -Wpointer-arith \
 	  -Wredundant-decls \
 	  -Wshadow \
-	  -Wsign-compare \
-	  -Wstack-protector \
 	  -Wstrict-aliasing=2 \
 	  -Wstrict-prototypes \
 	  -Wundef \
@@ -41,7 +37,7 @@ CFLAGS  = -std=c99 \
 #------------------------------------------------------------------------------
 all : teste
 
-teste : teste.o grafo.o
+teste : teste.o fila.o grafo.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 #------------------------------------------------------------------------------

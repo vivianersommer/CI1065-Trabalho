@@ -8,7 +8,7 @@
 
 #define MAX_NOME 20
 
-struct Grafo* criar_grafo(){
+struct Grafo* criar_grafo(void){
     struct Grafo* grafo = (struct Grafo*) malloc(sizeof(struct Grafo));
 
     grafo->numero_vertices = 0;
@@ -33,18 +33,13 @@ void adicionar_aresta(struct Grafo* grafo, char src[MAX_NOME], char dest[MAX_NOM
     struct Nodo_Lista_Adj* nodo_2 = criar_Nodo_Lista_Adj(src);
     int index_src, index_dest = 0;
 
-    // puts(src);
     index_src = procurar_vertice(grafo, src);
-    // puts(dest);
     index_dest = procurar_vertice(grafo, dest);
 
-    // printf("Adicionar no vértice %s - %d ligacao com vértice %s\n", src, index_src, dest);
     if (grafo->lista[index_src].cabeca == NULL) {
-        // puts("Caso 1");
         nodo_1->proximo = grafo->lista[index_src].cabeca;
         grafo->lista[index_src].cabeca = nodo_1;
     } else {
-        // puts("Caso 2");
         check = grafo->lista[index_src].cabeca;
         while (check->proximo != NULL) {
             check = check->proximo;
@@ -52,13 +47,10 @@ void adicionar_aresta(struct Grafo* grafo, char src[MAX_NOME], char dest[MAX_NOM
         check->proximo = nodo_1;
     }
 
-    // printf("Adicionar no vértice %s - %d ligacao com vértice %s\n", dest, index_dest, src);
     if (grafo->lista[index_dest].cabeca == NULL) {
-        // puts("Caso 3");
         nodo_2->proximo = grafo->lista[index_dest].cabeca;
         grafo->lista[index_dest].cabeca = nodo_2;
     } else {
-        // puts("Caso 4");
         check = grafo->lista[index_dest].cabeca;
         while (check->proximo != NULL) {
             check = check->proximo;
@@ -89,14 +81,11 @@ int procurar_vertice(struct Grafo* grafo, char ver[MAX_NOME]){
     for(int i=0; i <= grafo->numero_vertices; i++){
 
         item = grafo->lista[i];
-        if (strcmp(item.nome, ver) == 0){ //vertice já está na lista
-            // puts("Encontrei o vértice");
+        if (strcmp(item.nome, ver) == 0){
             return i;
         }
     }
 
-    // puts("Não encontrei o vértice");
-    // se após percorrer lista, não encontrar = criar novo vértice
     return criar_vertice(grafo, ver);
 }
 
@@ -123,16 +112,17 @@ struct Grafo* leitura_arquivo(FILE *input){
         fscanf(input,"%s", str1);
         fscanf(input,"%s", str2);
 
-        adicionar_aresta(grafo, str1, str2); 
-        // printf("--------------------------\n");
-    }
+        if(str1 == '\0' && str2 == '\0'){
+            continue;
+        }
 
-//    imprimir_grafo(grafo);
+        adicionar_aresta(grafo, str1, str2); 
+    }
 
     return grafo;
 }
 
-struct Lista_Adj* leitura_vertice(){
+struct Lista_Adj* leitura_vertice(void){
 
     struct Lista_Adj* vertice = (struct Lista_Adj*) malloc(sizeof(struct Lista_Adj));
     char name[MAX_NOME];
@@ -194,7 +184,7 @@ int calcula_numero_vizinhos(struct Lista_Adj u){
 double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v){
 
     struct Fila* fila;
-    int n, index_u, index_v, index_viz, index_x, distancia[grafo->numero_vertices], tam_vizinhos;
+    int n, index_u, index_v, index_viz, index_x, distancia[grafo->numero_vertices];
     bool visitado[grafo->numero_vertices];
 
     n = grafo->numero_vertices;
@@ -244,4 +234,5 @@ double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v
 
     return distancia[index_v];
 }
+
 
