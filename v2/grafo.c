@@ -169,18 +169,6 @@ int destroi_grafo(struct Grafo* grafo){
     return grafo == NULL;
 }
 
-int calcula_numero_vizinhos(struct Lista_Adj u){
-
-    int vizinhos = 0;
-    struct Nodo_Lista_Adj* viz = u.cabeca;
-    while(viz != NULL){
-        viz = viz->proximo;
-        vizinhos = vizinhos + 1;
-    }
-
-    return vizinhos;
-}
-
 double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v){
 
     struct Fila* fila;

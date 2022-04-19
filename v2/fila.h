@@ -8,8 +8,11 @@
 // ESTRUTURAS DE DADOS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 struct Fila {
-    int frente, atras, tamanho, capacidade;
-    struct Lista_Adj* itens;
+    int frente;                     // Index de onde está o vértice na frente na Fila
+    int atras;                      // Index de onde está o vértice atras na Fila
+    int tamanho;                    // Tamanho atual da Fila
+    int capacidade;                 // Número máximo de vértices na fila
+    struct Lista_Adj* itens;        // Vértices na Fila
 };
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -34,14 +37,6 @@ struct Fila {
 
     // Função para ver remover item na fila -----------------------------------
     struct Lista_Adj desenfileira(struct Fila* fila);
-    // ------------------------------------------------------------------------
-
-    // Função para pegar primeiro item da fila --------------------------------
-    struct Lista_Adj frente(struct Fila* fila);
-    // ------------------------------------------------------------------------
-
-    // Função para pegar ultimo item da fila ----------------------------------
-    struct Lista_Adj atras(struct Fila* fila);
     // ------------------------------------------------------------------------
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

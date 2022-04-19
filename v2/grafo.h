@@ -9,22 +9,22 @@
 
     // Nodo da lista de adjacencia --------------------------------------------
     struct Nodo_Lista_Adj {
-        char nome[MAX_NOME];
-        struct Nodo_Lista_Adj* proximo;
+        char nome[MAX_NOME];                // nome do vértice que é vizinho ao vértice
+        struct Nodo_Lista_Adj* proximo;     // ponteiro para próximo vizinho do vértice
     };
     // ------------------------------------------------------------------------
 
     // Lista de adjacencia ----------------------------------------------------
     struct Lista_Adj {
-        char nome[MAX_NOME];
-        struct Nodo_Lista_Adj* cabeca;
+        char nome[MAX_NOME];                // nome do vértice
+        struct Nodo_Lista_Adj* cabeca;      // lista de vizinhos do vértice
     };
     // ------------------------------------------------------------------------
 
     // Grafo ------------------------------------------------------------------
     struct Grafo {
-        int numero_vertices;
-        struct Lista_Adj* lista;
+        int numero_vertices;                // número de vértices no grafo
+        struct Lista_Adj* lista;            // lista de vértices do grafo
     };
     // ------------------------------------------------------------------------
 
@@ -74,10 +74,6 @@
 
     // Função para calcular coeficiente de aproximação ------------------------
     double busca_largura(struct Grafo* grafo, struct Lista_Adj u, struct Lista_Adj v);
-    // ------------------------------------------------------------------------
-
-    // Função para calcular coeficiente de aproximação ------------------------
-    int calcula_numero_vizinhos(struct Lista_Adj u);
     // ------------------------------------------------------------------------
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
